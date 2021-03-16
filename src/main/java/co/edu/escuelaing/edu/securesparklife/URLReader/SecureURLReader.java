@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 public class SecureURLReader {
 
-    public static void main(String... args){
+    public static void main(String... args) {
         try {
             // Create a file and a password representation
             File trustStoreFile = new File("keystores/myTrustStore");
@@ -40,7 +40,7 @@ public class SecureURLReader {
             SSLContext.setDefault(sslContext);
 
             // We can now read this URL
-            readURL("https://localhost:5000/helloservice");
+            readURL("https://localhost:5000/index.html");
 
             // This one can't be read because the Java default truststore has been
             // changed.

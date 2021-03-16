@@ -1,0 +1,128 @@
+h1 {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: #777;
+    font-family: sans-serif;
+    background: radial-gradient(#fff, #ffd6d6);
+    font-weight: 300;
+}
+
+.login-container {
+    position: relative;
+    margin: 4% auto;
+    height: 400px;
+    width: 600px;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.login-container__login {
+    position: absolute;
+    width: 222px;
+    height: 190px;
+    margin: 105px 189px 105px 189px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #fff;
+}
+
+.login-container__login input {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 220px;
+    height: 32px;
+    border: 1px solid #fff;
+    outline: none;
+    font-size: 15px;
+    transition: 1s;
+    color: #000;
+    background: transparent;
+}
+
+.login-container__login input::placeholder {
+    color: #fff;
+}
+
+.login-container__login input:focus {
+    background: #d3d3d3;
+    height: 40px;
+    color: #000;
+}
+
+.login-container__login button {
+    margin-bottom: 28px;
+    width: 180px;
+    height: 32px;
+    background: #ff833b;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.login-container__login button:hover {
+    background: #b60707;
+    color: #fff;
+}
+
+/* Media para menu responsive */
+
+@media only screen and (max-width: 800px) {
+    nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: #333333;
+        width: 100%;
+        overflow: hidden;
+        transition: max-height 0.5s;
+        z-index: 100;
+    }
+
+    nav ul li {
+        display: block;
+        margin-right: 50px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    nav ul li a {
+        color: #fff;
+    }
+
+    .menu-icon {
+        display: block;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .login-container {
+        display: inline-block;
+        align-items: center;
+        width: 100%;
+        height: 840px;
+        background: black;
+    }
+
+    .login-container__login {
+        position: relative;
+        margin: 10px 30px;
+        background: #32508e;
+    }
+}

@@ -4,6 +4,7 @@ import static spark.Spark.*;
 
 /**
  * Clase SecureServices
+ *
  * @author Andres Mateo Calderon Ortega
  */
 public class SecureServices {
@@ -13,12 +14,18 @@ public class SecureServices {
      *
      * @param args - args
      */
-    public static void main(String... args) {
+    public static void main(String[] args) {
         // API: secure(keystoreFilePath, keystorePassword, truststoreFilePath,truststorePassword);
         secure("keystores/ecikeystore.p12", "123456", null, null);
         port(getPort());
-        init();
+        System.out.println("Aplicación ejecutada por el puerto: " + getPort());
+        staticFiles.location("/public");
         get("/helloservice", (req, res) -> "Hello from secure service");
+        /*get("/", (request, response) -> {
+            response.type("text/html");
+            response.redirect("index.html");
+            return null;
+        });*/
     }
 
     /**
