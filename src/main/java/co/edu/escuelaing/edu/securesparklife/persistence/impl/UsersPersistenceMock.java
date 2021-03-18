@@ -10,19 +10,17 @@ import java.util.ArrayList;
 
 public class UsersPersistenceMock implements UsersPesistence {
 
-    private ArrayList<User> userArrayList = new ArrayList<>();
+    private final ArrayList<User> userArrayList = new ArrayList<>();
 
     @Override
-    public ArrayList<User> loadPlataformUsers(String usuarios) {
-        JsonParser parser = new JsonParser();
-        JsonObject jsonObject = (JsonObject) parser.parse(usuarios);
-        JsonArray jsonElements = jsonObject.getAsJsonArray("usuarios");
-        for (int i=0; i < jsonElements.size(); i++){
-            JsonObject tempJson = jsonElements.get(i).getAsJsonObject();
-            //String username, String mail, String password
-            User user = new User(tempJson.get("username").toString(), tempJson.get("mail").toString(), tempJson.get("password").toString());
-            userArrayList.add(user);
-        }
+    public ArrayList<User> loadPlataformUsers() {
+
+        User userAdmin = new User("admin", "admin@admin.com", "7d64e1eeca3f4f28fc0db624f1abaec1ea94dfbaf56feca44bbfee5b4fb27ff7");
+        User userUser = new User("candres1019", "andres.calderon-o@mail.escuelaing.edu.co", "f873139c0d0ffcea24e71b34384e352ff59ba93426cf9050b97382036629b3d4");
+
+        userArrayList.add(userAdmin);
+        userArrayList.add(userUser);
+
         return userArrayList;
     }
 

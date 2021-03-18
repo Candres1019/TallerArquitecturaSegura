@@ -6,6 +6,6 @@ import java.util.ArrayList;
 
 public interface UsersPesistence {
 
-    ArrayList<User> loadPlataformUsers(String usuarios);
+    ArrayList<User> loadPlataformUsers();
 
 }

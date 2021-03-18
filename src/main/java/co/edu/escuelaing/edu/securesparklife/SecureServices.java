@@ -37,32 +37,27 @@ public class SecureServices {
 
         staticFiles.location("/public");
 
-        post("/loadUsers", (request, response) -> {
-            response.status(200);
-            response.type("application/json");
-            appServices.loadPlataformUsers(request.body());
-            return true;
-        });
+        AppServicesImpl.getInstance().loadUsers();
 
         get("/admin", ((request, response) -> {
             if (!logged){
-                return "Debes loggearte primero para acceder a la pagina !";
+                return "Fcita no pueda utilizar el servicio prro";
             }else{
-                return "Loggin Success";
+                return "Listo pa mandar al otro servicio";
             }
         }));
 
-        post("/login", ((request, response) -> {
-            return login(request.body());
+        post("/loginUser", ((request, response) -> {
+            return tryLogin(request.body());
         }));
     }
 
-    private static Boolean login(String cadena) {
+    private static Boolean tryLogin(String cadena) {
         JsonParser parser = new JsonParser();
         JsonObject jsonObject = (JsonObject) parser.parse(cadena);
         Boolean pudo = appServices.getLogin(jsonObject.get("user").getAsString(), jsonObject.get("password").getAsString());
-        System.out.println(pudo);
-        return pudo;
+        logged = pudo;
+        return logged;
     }
 
     /**
