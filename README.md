@@ -34,42 +34,77 @@ Adicionalmente se recomienda tener descargado los siguientes programas:
 
 ### Integración Continua
 
-[![CircleCI](https://circleci.com/gh/Candres1019/TallerArquitecturas-IOC-Reflexion.svg?style=svg)](https://app.circleci.com/pipelines/github/Candres1019/TallerArquitecturas-IOC-Reflexion)
+[![CircleCI](https://circleci.com/gh/Candres1019/TallerArquitecturaSegura.svg?style=svg)](https://app.circleci.com/pipelines/github/Candres1019/TallerArquitecturaSegura)
+
+### Arquitectura
 
 ### Instalación
+
+Nota: Para la instalación debe estar corriendo de manera correcta Docker
 
 1. Clonación o Descarga del Proyecto:
 
     * Para **Clonar** el proyecto utilice el siguiente comando en la ventana de comandos:
 
-   ```
-   git clone https://github.com/Candres1019/TallerArquitecturas-IOC-Reflexion.git
-   ```
+   > ```
+   > git clone https://github.com/Candres1019/TallerArquitecturaSegura.git
+   > ```
 
     * Para **Descargar** el proyecto de
-      click [aquí](https://github.com/Candres1019/TallerArquitecturas-IOC-Reflexion/archive/master.zip), la descarga
-      comenzara de manera automática.
+      click [aquí](https://github.com/Candres1019/TallerArquitecturaSegura/archive/refs/heads/main.zip), la descarga
+      comenzará de manera automática.
+      
+   > Debería visualizar algo como lo siguiente:
+   > 
+   > ![](./Img/Ins1.png)   
 
-2. En una ventana de comandos ejecute el siguiente comando, dentro de la carpeta principal del proyecto:
-
-   ```
-    mvn package
-    ```
-
-3. Para ejecutar la aplicación de manera local utilizamos en la ventana de comandos el siguiente comando:
+2. En una ventana de comandos ejecuté el siguiente comando, dentro de la carpeta principal del proyecto:
 
    > ```
-    > java -cp "target/classes" co.edu.escuelaing.arep.picospring.PicoSpringBoot co.edu.escuelaing.arep.controllers.SpringAppController
+    > mvn package
     > ```
+   
+   > Debería visualizar algo como lo siguiente:
+   >
+   > ![](./Img/Ins2.png)
 
-4. Para ver el aplicativo web de manera local ingresamos al siguiente enlace, dentro de este enlace encontrará los
-   botones para realizar las acciones específicas (ver imagen, ver js, ver css, ver datos, insertar datos):
+
+3. Para ejecutar la aplicación de manera local utilizamos en la ventana de comandos el siguiente comando dentro del
+   directorio DockerFiles:
 
    > ```
-    > http://localhost:8080/
+    > docker-compose up -d
     > ```
 
-5. Por defecto se creó la documentación JavaDoc y fue dejada en el directorio /Javadoc, si desea generar uno nuevo
+   > Debería visualizar algo como lo siguiente al inicio de la ejecución:
+   >
+   > ![](./Img/Ins3_1.png)
+   > 
+   > Debería visualizar algo como lo siguiente al final de la ejecución:
+   >
+   > ![](./Img/Ins3_2.png)
+   
+4. Para verificar que todo esté funcionando de manera correcta ejecutamos el siguiente comando:
+
+   > ```
+    > docker ps
+    > ```
+
+   > Debería visualizar lo siguiente:
+   >
+   > ![](./Img/Ins4.png)
+
+5. Para ver el aplicativo web de manera local ingresamos al siguiente enlace (Se recomienda usar firefox):
+
+   > ```
+    > https://localhost:5000/
+    > ```
+   
+   > Debería visualizar lo siguiente:
+   >
+   > ![](./Img/Ins5.png)
+
+6. Por defecto se creó la documentación JavaDoc y fue dejada en el directorio /Javadoc, si desea generar uno nuevo
    utilice el siguiente comando, esta documentación quedará en el directorio /target/site/apidocs :
 
    > ```
@@ -88,7 +123,7 @@ En una ventana de comandos, utilice el siguiente comando:
 
 * [Java](https://www.java.com/es/) - Lenguaje de Programación.
 * [JUnit](https://junit.org/junit5/) - Pruebas de Unidad.
-* [Maven](https://maven.apache.org/) - Manejo de dependecias.
+* [Maven](https://maven.apache.org/) - Manejo de dependencias.
 * [IntelliJ IDEA](https://www.jetbrains.com/es-es/idea/) - Entorno de Desarrollo.
 
 ## Authors
@@ -97,4 +132,4 @@ En una ventana de comandos, utilice el siguiente comando:
 
 # Licencia
 
-Este proyecto está licenciado bajo la GNU v3.0 - ver el archivo [LICENSE](./LICENSE) para más detalles
+Este proyecto está licenciado bajo la GNU v3.0 - ver el archivo [LICENSE](./LICENSE) para más detalles.
