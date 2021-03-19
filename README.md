@@ -38,6 +38,25 @@ Adicionalmente se recomienda tener descargado los siguientes programas:
 
 ### Arquitectura
 
+La arquitectura del aplicativo se basa en el siguiente modelo:
+
+![](./Img/Arquitectura.png)
+
+La arquitectura de la seguridad de este aplicativo se basa esencialmente en el uso de certificados web, con el cual sé
+mantiene un control estricto de los servicios a los cuales se puede acceder de manera local y remota, esto permite tener
+un control sobre que servicios se están ofreciendo y consumiendo internamente, además de poder guardar los servicios que
+no queremos que sean expuestos, como se puede visualizar en el diagrama de la arquitectura cada servicio ofrecido ase
+uso de sus propios "KeyStore" y "TrustStore".
+
+En él [directorio](./keystores) se encuentran almacenados los certificados y los TrustStore de los dos servicios
+ofrecidos, la manera más óptima y más fácil de ampliar esta arquitectura es haciendo uso de los mismos, para agregar un
+nuevo servicio, se crearían "KeyStore" y "TrustStore" nuevos para cada servicio y agregando los certificados que
+correspondan a cada uno de ellos.
+
+Por último y como segundo nivel de seguridad se tiene un servicio de login el cual bloquea el uso de servicios si no sé
+encuentra una sesión activada, además de esto cifra las contraseñas de los usuarios haciendo uso de la función Hash
+SHA256
+
 ### Instalación
 
 Nota: Para la instalación debe estar corriendo de manera correcta Docker
@@ -53,17 +72,17 @@ Nota: Para la instalación debe estar corriendo de manera correcta Docker
     * Para **Descargar** el proyecto de
       click [aquí](https://github.com/Candres1019/TallerArquitecturaSegura/archive/refs/heads/main.zip), la descarga
       comenzará de manera automática.
-      
+
    > Debería visualizar algo como lo siguiente:
-   > 
-   > ![](./Img/Ins1.png)   
+   >
+   > ![](./Img/Ins1.png)
 
 2. En una ventana de comandos ejecuté el siguiente comando, dentro de la carpeta principal del proyecto:
 
    > ```
     > mvn package
     > ```
-   
+
    > Debería visualizar algo como lo siguiente:
    >
    > ![](./Img/Ins2.png)
@@ -79,11 +98,11 @@ Nota: Para la instalación debe estar corriendo de manera correcta Docker
    > Debería visualizar algo como lo siguiente al inicio de la ejecución:
    >
    > ![](./Img/Ins3_1.png)
-   > 
+   >
    > Debería visualizar algo como lo siguiente al final de la ejecución:
    >
    > ![](./Img/Ins3_2.png)
-   
+
 4. Para verificar que todo esté funcionando de manera correcta ejecutamos el siguiente comando:
 
    > ```
@@ -99,7 +118,7 @@ Nota: Para la instalación debe estar corriendo de manera correcta Docker
    > ```
     > https://localhost:5000/
     > ```
-   
+
    > Debería visualizar lo siguiente:
    >
    > ![](./Img/Ins5.png)
