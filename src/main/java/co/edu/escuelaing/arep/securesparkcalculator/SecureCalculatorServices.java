@@ -15,42 +15,34 @@ public class SecureCalculatorServices {
     public static void main(String[] args) {
         // API: secure(keystoreFilePath, keystorePassword, truststoreFilePath,truststorePassword);
         secure("keystores/calculator/calculatorkeystore.p12", "123456", "keystores/calculator/calculatorTrustStore", "654321");
-
         port(getPort());
-
         System.out.println("Corriendo por el puerto: " + getPort());
+        options("/*", (request, response) -> {
+            String accessControlRequestHeaders = request
+                    .headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                response.header("Access-Control-Allow-Headers",
+                        accessControlRequestHeaders);
+            }
+            String accessControlRequestMethod = request
+                    .headers("Access-Control-Request-Method");
+            if (accessControlRequestMethod != null) {
+                response.header("Access-Control-Allow-Methods",
+                        accessControlRequestMethod);
+            }
 
-        options("/*",
-                (request, response) -> {
-
-                    String accessControlRequestHeaders = request
-                            .headers("Access-Control-Request-Headers");
-                    if (accessControlRequestHeaders != null) {
-                        response.header("Access-Control-Allow-Headers",
-                                accessControlRequestHeaders);
-                    }
-
-                    String accessControlRequestMethod = request
-                            .headers("Access-Control-Request-Method");
-                    if (accessControlRequestMethod != null) {
-                        response.header("Access-Control-Allow-Methods",
-                                accessControlRequestMethod);
-                    }
-
-                    return "OK";
-                });
-
+            return "OK";
+        });
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
-
         post("/calculator", (request, response) -> {
             response.type("application/json");
             CalculadoraEstadistica calculadoraEstadistica = new CalculadoraEstadistica();
             calculadoraEstadistica.stringToLinkedList(request.body());
             double media = calculadoraEstadistica.calcularMedia();
             double desviacionEstandar = calculadoraEstadistica.calcularDesviacionEstandar();
+
             return new Gson().toJson("{\"media\": \"" + media + "\", \"desviacionEstandar\": \"" + desviacionEstandar + "\"}");
         });
-
     }
 
     /**
@@ -61,8 +53,10 @@ public class SecureCalculatorServices {
      */
     private static int getPort() {
         if (System.getenv("PORT") != null) {
+
             return Integer.parseInt(System.getenv("PORT"));
         }
+
         return 5001;
     }
 

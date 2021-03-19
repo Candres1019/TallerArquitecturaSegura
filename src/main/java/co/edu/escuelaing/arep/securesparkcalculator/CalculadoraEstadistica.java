@@ -3,6 +3,7 @@ package co.edu.escuelaing.arep.securesparkcalculator;
 import co.edu.escuelaing.arep.securesparkcalculator.util.LinkedListImp;
 import co.edu.escuelaing.arep.securesparkcalculator.util.Node;
 
+
 /**
  * Aplicacion de la calculadora estadistica, haciendo uso de una lista enlazada
  * implementada desde cero.

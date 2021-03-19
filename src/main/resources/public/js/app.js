@@ -44,13 +44,16 @@ const app = (function () {
             contentType: "application/json"
         });
         miniPromise.then(function (data) {
+            //let url =  "https://ec2-100-26-246-155.compute-1.amazonaws.com:5001/calculator";
+            //let url =  "https://localhost:5001/calculator";
+            let url =  "https://172.17.0.1:5001/calculator";
             if (data === "false") {
                 alert("Debe hacer login primero antes de intentar hacer calculos");
                 window.location.href = "/index.html";
             } else {
                 console.log(JSON.stringify(daticos))
                 const promise = $.post({
-                    url: "https://ec2-100-26-246-155.compute-1.amazonaws.com:5001/calculator",
+                    url: url,
                     data: JSON.stringify(daticos),
                     contentType: "application/json"
                 });
