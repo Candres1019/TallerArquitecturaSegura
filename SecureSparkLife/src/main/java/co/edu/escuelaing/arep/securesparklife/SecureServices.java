@@ -1,9 +1,12 @@
 package co.edu.escuelaing.arep.securesparklife;
 
-import co.edu.escuelaing.arep.securesparklife.services.AppServices;
-import co.edu.escuelaing.arep.securesparklife.services.impl.AppServicesImpl;
+import co.edu.escuelaing.arep.securesparklife.entities.User;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.apache.commons.codec.digest.DigestUtils;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import static spark.Spark.*;
 
@@ -15,8 +18,8 @@ import static spark.Spark.*;
  */
 public class SecureServices {
 
-    private static final AppServices appServices = new AppServicesImpl();
     private static Boolean logged = false;
+    private static final User userAdmin = new User("admin", "admin@admin.com", "7d64e1eeca3f4f28fc0db624f1abaec1ea94dfbaf56feca44bbfee5b4fb27ff7");
 
     /**
      * Método Main de la clase SecureServices
@@ -57,7 +60,7 @@ public class SecureServices {
 
         System.out.println("Corriendo por el puerto: " + getPort());
 
-        AppServicesImpl.getInstance().loadUsers();
+        init();
 
         get("/admin", ((request, response) -> {
             if (!logged) {
@@ -68,9 +71,12 @@ public class SecureServices {
         }));
 
         post("/loginUser", ((request, response) -> {
+            response.status(200);
             JsonParser parser = new JsonParser();
             JsonObject jsonObject = (JsonObject) parser.parse(request.body());
-            return tryLogin(jsonObject.get("user").getAsString(), jsonObject.get("password").getAsString());
+            Boolean resultado = tryLogin(jsonObject.get("user").getAsString(), jsonObject.get("password").getAsString());
+            System.out.println(resultado);
+            return resultado;
         }));
 
         post("/logoutUser", ((request, response) -> {
@@ -93,14 +99,24 @@ public class SecureServices {
     }
 
     private static Boolean tryLogin(String user, String pass) {
-        Boolean pudo = appServices.getLogin(user, pass);
+        String passwd = encryptPassword(pass);
+        System.out.println(passwd);
+        System.out.println(userAdmin.getPassword());
+        System.out.println(passwd.equals(userAdmin.getPassword()));
+        System.out.println(user.equals(userAdmin.getUsername()));
+        Boolean pudo = user.equals(userAdmin.getUsername()) && passwd.equals(userAdmin.getPassword());
         logged = pudo;
+        System.out.println(logged);
         return logged;
     }
 
     private static Boolean logOut(String usuario) {
         logged = false;
         return true;
+    }
+
+    public static String encryptPassword(String password) {
+        return DigestUtils.sha256Hex(password);
     }
 
     /**

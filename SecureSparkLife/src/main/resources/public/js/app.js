@@ -6,12 +6,14 @@ const app = (function () {
         let cadena = {};
         cadena["user"] = user;
         cadena["password"] = pass;
+        console.log(pass)
         const promise = $.post({
             url: "/loginUser",
             data: JSON.stringify(cadena),
             contentType: "application/json"
         });
         promise.then(function (data) {
+            console.log(data)
             if (data === "true") {
                 alert("Redirigiendo a pagina Administradora");
                 window.location.href = "/admin/calculator.html";
