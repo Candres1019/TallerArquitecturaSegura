@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  securelogin:
+    build:
+      context: ../
+      dockerfile: ./DockerFiles/SecureLogin/Dockerfile
+    container_name: securelogincontainer
+    ports:
+      - "5000:6000"
+  securecalculator:
+    build:
+      context: ../
+      dockerfile: ./DockerFiles/SecureCalculator/Dockerfile
+    container_name: securecalculatorcontainer
+    ports:
+      - "5001:6000"

@@ -1,6 +1,8 @@
 package co.edu.escuelaing.arep.securesparklife;
 
 import co.edu.escuelaing.arep.securesparklife.entities.User;
+import co.edu.escuelaing.arep.securesparklife.services.AppService;
+import co.edu.escuelaing.arep.securesparklife.services.impl.AppServiceImpl;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -19,7 +21,8 @@ import static spark.Spark.*;
 public class SecureServices {
 
     private static Boolean logged = false;
-    private static final User userAdmin = new User("admin", "admin@admin.com", "7d64e1eeca3f4f28fc0db624f1abaec1ea94dfbaf56feca44bbfee5b4fb27ff7");
+    private static User userAdmin;
+    private static final AppService appService = new AppServiceImpl();
 
     /**
      * Método Main de la clase SecureServices
@@ -27,10 +30,9 @@ public class SecureServices {
      * @param args - args
      */
     public static void main(String[] args) {
-        /*admin@1019"*/
-        /*candres@1019"*/
+        userAdmin = appService.loadPlataformUser();
         // API: secure(keystoreFilePath, keystorePassword, truststoreFilePath,truststorePassword);
-        secure("keystores/securelifestore.p12", "123456", "keystores/SecureTrustStore", "654321");
+        secure("keystores/service/securelifestore.p12", "123456", "keystores/service/SecureTrustStore", "654321");
 
         port(getPort());
 
@@ -74,9 +76,7 @@ public class SecureServices {
             response.status(200);
             JsonParser parser = new JsonParser();
             JsonObject jsonObject = (JsonObject) parser.parse(request.body());
-            Boolean resultado = tryLogin(jsonObject.get("user").getAsString(), jsonObject.get("password").getAsString());
-            System.out.println(resultado);
-            return resultado;
+            return tryLogin(jsonObject.get("user").getAsString(), jsonObject.get("password").getAsString());
         }));
 
         post("/logoutUser", ((request, response) -> {
@@ -99,24 +99,14 @@ public class SecureServices {
     }
 
     private static Boolean tryLogin(String user, String pass) {
-        String passwd = encryptPassword(pass);
-        System.out.println(passwd);
-        System.out.println(userAdmin.getPassword());
-        System.out.println(passwd.equals(userAdmin.getPassword()));
-        System.out.println(user.equals(userAdmin.getUsername()));
-        Boolean pudo = user.equals(userAdmin.getUsername()) && passwd.equals(userAdmin.getPassword());
-        logged = pudo;
-        System.out.println(logged);
+        String passwd = appService.encryptPassword(pass);
+        logged = user.equals(userAdmin.getUsername()) && passwd.equals(userAdmin.getPassword());
         return logged;
     }
 
     private static Boolean logOut(String usuario) {
         logged = false;
         return true;
-    }
-
-    public static String encryptPassword(String password) {
-        return DigestUtils.sha256Hex(password);
     }
 
     /**
