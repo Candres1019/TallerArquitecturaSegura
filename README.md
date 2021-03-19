@@ -1,4 +1,4 @@
-# Taller de Arquitecturas de Servidores de Aplicaciones, Meta Protocolos de Objetos, Patron IOC y Reflexión
+# Taller Aplicación Distribuida Segura en todos sus Frentes
 
 Aplicativo Web diseñado en Java con el objetivo de crear un servidor HTTP, y un framework que simule algunas de las funciones
 del framework Spring, este servidor acepta peticiones get que son mapeadas haciendo uso de anotaciones en los metodos y 

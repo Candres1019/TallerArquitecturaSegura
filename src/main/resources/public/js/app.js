@@ -50,7 +50,7 @@ const app = (function () {
             } else {
                 console.log(JSON.stringify(daticos))
                 const promise = $.post({
-                    url: "https://172.17.0.1:5001/calculator",
+                    url: "https://ec2-100-26-246-155.compute-1.amazonaws.com:5001/calculator",
                     data: JSON.stringify(daticos),
                     contentType: "application/json"
                 });
