@@ -8,7 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="TallerArquitecturaSegura" />
         <module name="SecureSparkLife" />
+        <module name="SecureSparkCalculator" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="calculatorservice" target="15" />
+      <module name="TallerArquitecturaSegura" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
