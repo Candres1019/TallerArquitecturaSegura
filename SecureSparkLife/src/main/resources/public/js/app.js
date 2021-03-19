@@ -50,7 +50,7 @@ const app = (function () {
                 const promise = $.post({
                     url: "https://172.17.0.1:5001/calculator",
                     data: JSON.stringify(daticos),
-                    contentType: "application/json";
+                    contentType: "application/json"
                 });
                 promise.then(function (data) {
                     console.log(data);
