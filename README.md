@@ -10,7 +10,12 @@ control sobre las sesiones de estos usuarios y de encriptar las contraseñas de 
 
 ## Información Del Proyecto
 
-* La documentación del las clases y los metodos del proyecto se encuentran en el directorio adjunto /Javadoc/apidocs.
+* La documentación del las clases y los métodos del proyecto se encuentran en el directorio adjunto /Javadoc/apidocs.
+* Las credenciales de el usuario quemado en el código es:
+
+  > Usuario: admin
+  >
+  > Contraseña: admin@1019
 
 ### Pre-Requisitos
 
